@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Game</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- תפריט עליון -->
+    <div id="top-bar">
+
+        <div class="left-buttons">
+            <button onclick="openAuth()">התחברות / הרשמה</button>
+            <button onclick="openChat()">צ'אט</button>
+            <button onclick="openMessages()">Messages</button>
+            <button id="adminButton" style="display:none;" onclick="openAdmin()">
+                מנהל
+            </button>
+        </div>
+
+        <div class="logo">
+            Element Game
+        </div>
+
+    </div>
+
+    <!-- אזור ראשי -->
+    <div id="main-container">
+
+        <!-- אזור המשחק -->
+        <div id="workspace">
+
+            <div id="workspace-header">
+                <h2>אזור חיבור יסודות</h2>
+            </div>
+
+            <div id="game-area">
+                <!-- היסודות הנגררים יופיעו כאן -->
+            </div>
+
+        </div>
+
+        <!-- מאגר יסודות -->
+        <div id="sidebar">
+
+            <h2>יסודות</h2>
+
+            <div id="elements-list">
+                <!-- נטען מה-JavaScript -->
+            </div>
+
+            <hr>
+
+            <h2>תגליות</h2>
+
+            <div id="discoveries">
+                <!-- נטען מה-JavaScript -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- חלון התחברות והרשמה -->
+    <div id="authModal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <h2>התחברות / הרשמה</h2>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="שם משתמש"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="סיסמה"
+            >
+
+            <div class="modal-buttons">
+                <button onclick="login()">התחבר</button>
+                <button onclick="registerUser()">הרשם</button>
+            </div>
+
+            <button class="close-btn" onclick="closeAuth()">
+                סגור
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- חלון צ'אט -->
+    <div id="chatModal" class="modal hidden">
+
+        <div class="modal-box large-modal">
+
+            <h2>צ'אט שחקנים</h2>
+
+            <div id="chatMessages"></div>
+
+            <div class="chat-send">
+
+                <input
+                    type="text"
+                    id="chatInput"
+                    placeholder="כתוב הודעה..."
+                >
+
+                <button onclick="sendChatMessage()">
+                    שלח
+                </button>
+
+            </div>
+
+            <button class="close-btn" onclick="closeChat()">
+                סגור
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- הודעות מערכת -->
+    <div id="messagesModal" class="modal hidden">
+
+        <div class="modal-box large-modal">
+
+            <h2>הודעות מערכת</h2>
+
+            <div id="systemMessages"></div>
+
+            <!-- מופיע רק למנהלים -->
+            <div id="adminMessageControls" style="display:none;">
+
+                <textarea
+                    id="adminMessageInput"
+                    placeholder="כתוב הודעת מערכת..."
+                ></textarea>
+
+                <button onclick="sendAdminMessage()">
+                    שלח הודעה
+                </button>
+
+            </div>
+
+            <button class="close-btn" onclick="closeMessages()">
+                סגור
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- פאנל מנהל -->
+    <div id="adminModal" class="modal hidden">
+
+        <div class="modal-box large-modal">
+
+            <h2>פאנל מנהל</h2>
+
+            <h3>רשימת משתמשים</h3>
+
+            <div id="usersList"></div>
+
+            <button class="close-btn" onclick="closeAdmin()">
+                סגור
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- אפקטי קול -->
+    <audio id="mergeSound" preload="auto">
+        <source src="sounds/merge.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="discoverSound" preload="auto">
+        <source src="sounds/discover.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- קובץ המשחק -->
+    <script src="script.js"></script>
+
+</body>
+</html>

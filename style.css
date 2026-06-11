@@ -1,0 +1,429 @@
+/* =========================
+   בסיס
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#050816;
+    color:white;
+    overflow:hidden;
+}
+
+/* =========================
+   תפריט עליון
+========================= */
+
+#top-bar{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+
+    height:60px;
+
+    background:#111827;
+
+    border-bottom:2px solid cyan;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 15px;
+
+    z-index:1000;
+}
+
+.left-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+    color:cyan;
+}
+
+button{
+    background:#1f2937;
+    color:white;
+
+    border:1px solid cyan;
+
+    padding:8px 12px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+button:hover{
+    background:#374151;
+    transform:scale(1.05);
+}
+
+/* =========================
+   מבנה ראשי
+========================= */
+
+#main-container{
+    display:flex;
+
+    height:100vh;
+
+    padding-top:60px;
+}
+
+/* =========================
+   אזור חיבור יסודות
+========================= */
+
+#workspace{
+    flex:1;
+
+    padding:10px;
+
+    background:
+    radial-gradient(circle at center,
+    #111827,
+    #050816);
+
+    display:flex;
+    flex-direction:column;
+}
+
+#workspace-header{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+#workspace-header h2{
+    color:cyan;
+}
+
+#game-area{
+    flex:1;
+
+    position:relative;
+
+    border:2px dashed cyan;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        rgba(0,255,255,0.05) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        90deg,
+        rgba(0,255,255,0.05) 1px,
+        transparent 1px
+    );
+
+    background-size:40px 40px;
+
+    box-shadow:
+    0 0 20px rgba(0,255,255,0.2);
+}
+
+/* =========================
+   מאגר יסודות
+========================= */
+
+#sidebar{
+    width:180px;
+
+    min-width:180px;
+    max-width:180px;
+
+    background:#111827;
+
+    border-left:2px solid cyan;
+
+    padding:10px;
+
+    overflow-y:auto;
+}
+
+#sidebar h2{
+    color:cyan;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+#sidebar h3{
+    color:cyan;
+    text-align:center;
+    margin-top:15px;
+    margin-bottom:10px;
+}
+
+#sidebar hr{
+    margin:10px 0;
+}
+
+/* =========================
+   יסודות
+========================= */
+
+.element{
+    background:#1f2937;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:8px;
+
+    margin-bottom:6px;
+
+    cursor:grab;
+
+    transition:.2s;
+}
+
+.element:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 10px cyan;
+}
+
+.spawned-element{
+    position:absolute;
+
+    background:#1f2937;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:8px 10px;
+
+    cursor:move;
+
+    user-select:none;
+
+    transition:.2s;
+}
+
+.spawned-element:hover{
+    box-shadow:
+    0 0 10px cyan;
+}
+
+/* =========================
+   תגליות
+========================= */
+
+.discovery{
+    background:#0f172a;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:6px;
+
+    margin-bottom:5px;
+}
+
+/* =========================
+   מודלים
+========================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,0.7);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:3000;
+}
+
+.hidden{
+    display:none;
+}
+
+.modal-box{
+    width:400px;
+
+    max-width:90vw;
+
+    background:#111827;
+
+    border:2px solid cyan;
+
+    border-radius:12px;
+
+    padding:20px;
+}
+
+.large-modal{
+    width:700px;
+}
+
+.modal-box h2{
+    text-align:center;
+    margin-bottom:15px;
+    color:cyan;
+}
+
+.modal-box input,
+.modal-box textarea{
+    width:100%;
+
+    background:#0f172a;
+
+    color:white;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:10px;
+
+    margin-bottom:10px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.close-btn{
+    margin-top:10px;
+    width:100%;
+}
+
+/* =========================
+   צ'אט
+========================= */
+
+#chatMessages{
+    height:300px;
+
+    overflow-y:auto;
+
+    background:#0f172a;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:10px;
+
+    margin-bottom:10px;
+}
+
+.chat-message{
+    background:#1f2937;
+
+    border-radius:8px;
+
+    padding:6px;
+
+    margin-bottom:6px;
+}
+
+.chat-send{
+    display:flex;
+    gap:10px;
+}
+
+/* =========================
+   הודעות מערכת
+========================= */
+
+#systemMessages{
+    height:300px;
+
+    overflow-y:auto;
+
+    background:#0f172a;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:10px;
+
+    margin-bottom:10px;
+}
+
+.system-message{
+    background:#1f2937;
+
+    border-right:4px solid cyan;
+
+    padding:10px;
+
+    margin-bottom:10px;
+
+    border-radius:8px;
+}
+
+/* =========================
+   פאנל מנהל
+========================= */
+
+#usersList{
+    max-height:350px;
+
+    overflow-y:auto;
+
+    background:#0f172a;
+
+    border:1px solid cyan;
+
+    border-radius:8px;
+
+    padding:10px;
+}
+
+.user-card{
+    background:#1f2937;
+
+    border-radius:8px;
+
+    padding:8px;
+
+    margin-bottom:6px;
+}
+
+/* =========================
+   אנימציות
+========================= */
+
+@keyframes glow{
+    0%{
+        box-shadow:0 0 5px cyan;
+    }
+
+    50%{
+        box-shadow:0 0 20px cyan;
+    }
+
+    100%{
+        box-shadow:0 0 5px cyan;
+    }
+}
+
+.new-discovery{
+    animation:glow 1s infinite;
+}
