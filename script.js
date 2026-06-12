@@ -51,7 +51,14 @@ const EMOJIS = {
     "לבה":"🌋",
     "אובסידיאן":"⬛",
     "מכוש ברזל":"⛏️",
-    "אבן":"🪨"
+    "אבן":"🪨",
+    "מחצבה":"⛏️",
+    "יהלום":"💎",
+    "זהב":"🥇",
+    "קריסטל":"🔷",
+    "מכוש יהלום":"💎⛏️",
+    "מכוש מוזהב":"🥇⛏️",
+    "מכוש נוצץ":"✨⛏️"
 };
 
 /* =========================
@@ -64,7 +71,7 @@ const STARTER_ELEMENTS = [
     "אש",
     "מים",
     "עץ",
-    "ברזל",
+    "ברזל"
 ];
 
 /* =========================
@@ -110,8 +117,77 @@ const RECIPES = {
 
     "מכוש ברזל|אדמה":"אבן",
     "אדמה|מכוש ברזל":"אבן",
+
+   "אבן|ברזל":"מחצבה",
+   "ברזל|אבן":"מחצבה",
+
+   "מכוש ברזל|יהלום":"מכוש יהלום",
+   "יהלום|מכוש ברזל":"מכוש יהלום",
+   
+   "מכוש ברזל|זהב":"מכוש מוזהב",
+   "זהב|מכוש ברזל":"מכוש מוזהב",
+
+   "מכוש ברזל|קריסטל":"מכוש נוצץ",
+   "קריסטל|מכוש ברזל":"מכוש נוצץ",
+
+   "מכוש נוצץ|זהב":"מכוש מוזהב",
+   "זהב|מכוש נוצץ":"מכוש מוזהב",
+
+   "מכוש נוצץ|יהלום":"מכוש יהלום",
+   "יהלום|מכוש נוצץ":"מכוש יהלום",
+
+   "מכוש מוזהב|יהלום":"מכוש יהלום",
+   "יהלום|מכוש מוזהב":"מכוש יהלום"
 };
 
+const LOOT_TABLES = {
+
+    "מחצבה|מכוש ברזל":[
+
+        {
+            item:"יהלום",
+            chance:10
+        },
+
+        {
+            item:"זהב",
+            chance:60
+        },
+
+        {
+            item:"קריסטל",
+            chance:80
+        },
+
+        {
+            item:"אבן",
+            chance:90
+        }
+    ],
+
+    "מכוש ברזל|מחצבה":[
+
+        {
+            item:"יהלום",
+            chance:3
+        },
+
+        {
+            item:"זהב",
+            chance:60
+        },
+
+        {
+            item:"קריסטל",
+            chance:80
+        },
+
+        {
+            item:"אבן",
+            chance:100
+        }
+    ]
+};
 /* =========================
    משתני משחק
 ========================= */
@@ -440,6 +516,38 @@ function isColliding(a,b){
 ========================= */
 
 function getRecipeResult(
+   function getLootResult(
+    first,
+    second
+){
+
+    const key =
+        `${first}|${second}`;
+
+    const table =
+        LOOT_TABLES[key];
+
+    if(!table)
+        return null;
+
+    const roll =
+        Math.random() * 100;
+
+    for(
+        const loot
+        of table
+    ){
+
+        if(
+            roll <= loot.chance
+        ){
+
+            return loot.item;
+        }
+    }
+
+    return null;
+}
     first,
     second
 ){
@@ -455,9 +563,20 @@ function getRecipeResult(
 ========================= */
 
 function mergeElements(
-    firstElement,
-    secondElement
-){
+    let result =
+    getRecipeResult(
+        firstName,
+        secondName
+    );
+
+if(!result){
+
+    result =
+        getLootResult(
+            firstName,
+            secondName
+        );
+}
 
     const firstName =
         firstElement.dataset.element;
