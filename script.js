@@ -19,8 +19,8 @@ const discoverSound = document.getElementById("discoverSound");
 ========================= */
 
 const DEFAULT_ADMIN = {
-    username: "oriyf2016",
-    password: "oriroee1105",
+    username: "admin",
+    password: "change_me",
     admin: true
 };
 
