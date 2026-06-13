@@ -1023,6 +1023,27 @@ function sendChatMessage(){
     const text =
         input.value.trim();
 
+   if(text.startsWith("!event start")){
+
+    if(!currentUser || !currentUser.admin){
+        alert("רק מנהל יכול להתחיל איוונט");
+        return;
+    }
+
+    const parts = text.split(" ");
+    const amount = Number(parts[2]);
+
+    if(!amount || amount < 1){
+        alert("שימוש נכון: !event start 3");
+        return;
+    }
+
+    startElementEvent(amount);
+
+    input.value = "";
+    return;
+}
+
     if(text === "")
         return;
 
@@ -1218,3 +1239,44 @@ updateAdminPanelButton();
 console.log(
     "Element Game Loaded"
 );
+
+function startElementEvent(amount){
+
+    const allElements = discoveredElements;
+
+    for(let i = 0; i < amount; i++){
+
+        const randomElement =
+            allElements[
+                Math.floor(
+                    Math.random() * allElements.length
+                )
+            ];
+
+        const areaRect =
+            gameArea.getBoundingClientRect();
+
+        const x =
+            Math.random() * (areaRect.width - 100);
+
+        const y =
+            Math.random() * (areaRect.height - 50);
+
+        createGameElement(
+            randomElement,
+            x,
+            y
+        );
+    }
+
+    messages.unshift({
+        sender:"EVENT",
+        message:"🎉 איוונט התחיל! חולקו " + amount + " יסודות רנדומליים.",
+        date:Date.now()
+    });
+
+    saveMessages();
+    renderMessages();
+
+    alert("האיוונט התחיל!");
+}
